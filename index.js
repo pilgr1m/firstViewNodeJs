@@ -3,7 +3,7 @@
 // const result2 = myMath.add(5,5)
 // console.log(result, result2)
 
-const fs = require('fs')
+// const fs = require('fs')
 
 // const read = fs.readFileSync('other.txt', 'utf-8')
 // console.log(read)
@@ -41,3 +41,23 @@ const fs = require('fs')
 // fs.unlink('./wer/wer3.txt', () => {
 //     fs.rmdir('wer', () => {})
 // })
+
+// ---------
+// server
+const http = require('http')
+let server = http.createServer((request, response) => {
+    // console.log('request: ', request)
+    // console.log('response: ', response)
+    
+    response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+    response.end('Hello world!!! <br> I study <b>Node.Js</b>')
+})
+
+
+const PORT = 3000
+const HOST = 'localhost'
+// const HOST = '127.0.0.1'
+
+server.listen(PORT, HOST, ()=> {
+    console.log(`server :: http://${HOST}:${PORT}`)
+})
