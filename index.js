@@ -45,23 +45,23 @@
 // ---------
 // server
 const http = require('http')
+const fs = require('fs')
 let server = http.createServer((request, response) => {
     // console.log('request: ', request)
     // console.log('response: ', response)
     
     response.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-    response.end(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NODE.js</title>
-    </head>
-    <body>
-        Hello world!!! <br> <b>I study Node.Js</b>
-    </body>
-    </html>`)
+
+    if(request.url == '/'){
+        fs.createReadStream('./templates/index.html').pipe(response)
+    } else if (request.url == '/about') {
+			fs.createReadStream('./templates/about.html').pipe(response)
+		} else {
+			fs.createReadStream('./templates/page404.html').pipe(response)
+		}
+
+    // const stream = fs.createReadStream('./templates/index.html')
+    // stream.pipe(response)
 })
 
 
